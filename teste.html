@@ -1,0 +1,376 @@
+{% extends "dash-template.html" %}
+
+{% set page_route = "listaPesssoas" %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/listarPessoas.js') }}"></script>
+<script src="{{ url_for('static', filename='js/external/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/teste.js') }}"></script>
+
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/external/cards-extended.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/external/jquery.dataTables.min.css')}}">
+
+<style>
+
+    .card-aberto{
+        display: initial !important;
+    }
+    .card-oculto{
+        display: none !important;
+    }
+    .linha-dia{
+        display: flex !important;
+    }
+    .linha-dia-oculto{
+        display: none !important;
+    }
+    .linha-mes{
+        display: flex !important;
+    }
+    .linha-mes-oculto{
+        display: none !important;
+    }
+    .table-card-header{
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-right: 1px;
+        padding-left: 1px;
+        font-size: 0.8rem;
+        font-weight: 700!important;
+        text-align: center!important;
+    }
+    .table-card-content{
+        padding-top: 20px;
+        padding-bottom: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
+        text-align: center!important;
+        font-size: 1rem;
+    }
+    .icon-header{
+        font-size: 2rem;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="row m-2">
+    <!-- Card -->
+    <div class="card chart-card col-3 m-2">
+
+        <!-- Card content -->
+        <div class="card-body">
+
+            <!-- Title -->
+            <div class="">
+                <h4 class="float-left font-weight-bold" data-canal="mobile">Mobile</h4>
+                <div class="float-right">
+                    <a href="#" class="card-status" data-state="up">
+                        <div class="card-aberto">
+                            Ocultar
+                            <i class=" fas fa-chevron-up"></i>
+                        </div>
+                        <div class="card-oculto">
+                            Mostrar
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Text -->
+        <div class="card-body tabela-card">
+
+            <div class="row">
+                <div class="col-2 table-card-header">
+
+                </div>
+                <div class="col-4 table-card-header">
+                    clientes unicos
+                </div>
+                <div class="col-4 table-card-header">
+                    clientes impactados
+                </div>
+                <div class="col-2 table-card-header">
+                    %
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-2 table-card-header">
+                    <div>
+                        <i class="icon-header far fa-clock"></i>
+                    </div>
+                    <div>
+                        ultima hora
+                    </div>
+                </div>
+                <div class="col-4 table-card-content">
+                    329.8K
+                </div>
+                <div class="col-4 table-card-content">
+                    1.9K
+                </div>
+                <div class="col-2 table-card-content">
+                    0.6%
+                </div>
+
+            </div>
+
+            <div class="row linha-dia">
+                <div class="col-2 table-card-header">
+                    <div>
+                        <i class="icon-header fas fa-sun"></i>
+                    </div>
+                    <div>
+                        no dia
+                    </div>
+                </div>
+                <div class="col-4 table-card-content">
+                    329.8K
+                </div>
+                <div class="col-4 table-card-content">
+                    1.9K
+                </div>
+                <div class="col-2 table-card-content">
+                    0.6%
+                </div>
+
+            </div>
+            <div class="row linha-mes">
+                <div class="col-2 table-card-header">
+                    <div>
+                        <i class="icon-header far fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        no mes
+                    </div>
+                </div>
+                <div class="col-4 table-card-content">
+                    329.8K
+                </div>
+                <div class="col-4 table-card-content">
+                    1.9K
+                </div>
+                <div class="col-2 table-card-content">
+                    0.6%
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Classic tabs -->
+        <div class="classic-tabs">
+
+            <!-- Nav tabs -->
+            <ul class="nav tabs-white nav-fill" role="tablist">
+                <li class="nav-item ml-0">
+                    <a class="nav-link waves-light active" data-toggle="tab" href="#panel1001" role="tab">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-light" data-toggle="tab" href="#panel1002" role="tab">Follow</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-light" data-toggle="tab" href="#panel1003" role="tab">Contact</a>
+                </li>
+            </ul>
+
+            <div class="tab-content rounded-bottom">
+                <!--Panel 1-->
+                <div class="tab-pane fade in show active" id="panel1001" role="tabpanel">
+                    <canvas id="lineChart" height="250px"></canvas>
+                </div>
+                <!--/.Panel 1-->
+                <!--Panel 2-->
+                <div class="tab-pane fade" id="panel1002" role="tabpanel">
+                    <p align="justify" class="font-small text-muted mx-1">Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde
+                        eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit
+                        minima.</p>
+                    <p align="justify" class="font-small text-muted mx-1">Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde
+                        eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit
+                        minima.</p>
+                </div>
+                <!--/.Panel 2-->
+                <!--Panel 3-->
+                <div class="tab-pane fade" id="panel1003" role="tabpanel">
+                    <img class="img-fluid z-depth-1 rounded mb-3" alt="sample image"
+                         src="https://mdbootstrap.com/img/Photos/Others/intro1.jpg">
+                    <p align="justify" class="font-small text-muted mx-1">Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde
+                        eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima
+                        at ipsum sit amet.</p>
+                </div>
+                <!--/.Panel 3-->
+            </div>
+
+        </div>
+        <!-- Classic tabs -->
+
+    </div>
+    <!-- Card -->
+    <div class="card chart-card col-3 m-2">
+
+        <!-- Card content -->
+        <div class="card-body">
+
+            <!-- Title -->
+            <div class="">
+                <h4 class="float-left font-weight-bold" data-canal="mobile">Mobile</h4>
+                <div class="float-right">
+                    <a href="#" class="card-status" data-state="up">
+                        <div class="card-aberto">
+                            Ocultar
+                            <i class=" fas fa-chevron-up"></i>
+                        </div>
+                        <div class="card-oculto">
+                            Mostrar
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Text -->
+        <div class="card-body tabela-card">
+
+            <div class="row">
+                <div class="col-2 table-card-header">
+
+                </div>
+                <div class="col-4 table-card-header">
+                    clientes unicos
+                </div>
+                <div class="col-4 table-card-header">
+                    clientes impactados
+                </div>
+                <div class="col-2 table-card-header">
+                    %
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-2 table-card-header">
+                    <div>
+                        <i class="icon-header far fa-clock"></i>
+                    </div>
+                    <div>
+                        ultima hora
+                    </div>
+                </div>
+                <div class="col-4 table-card-content">
+                    329.8K
+                </div>
+                <div class="col-4 table-card-content">
+                    1.9K
+                </div>
+                <div class="col-2 table-card-content">
+                    0.6%
+                </div>
+
+            </div>
+
+            <div class="row linha-dia">
+                <div class="col-2 table-card-header">
+                    <div>
+                        <i class="icon-header fas fa-sun"></i>
+                    </div>
+                    <div>
+                        no dia
+                    </div>
+                </div>
+                <div class="col-4 table-card-content">
+                    329.8K
+                </div>
+                <div class="col-4 table-card-content">
+                    1.9K
+                </div>
+                <div class="col-2 table-card-content">
+                    0.6%
+                </div>
+
+            </div>
+            <div class="row linha-mes">
+                <div class="col-2 table-card-header">
+                    <div>
+                        <i class="icon-header far fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        no mes
+                    </div>
+                </div>
+                <div class="col-4 table-card-content">
+                    329.8K
+                </div>
+                <div class="col-4 table-card-content">
+                    1.9K
+                </div>
+                <div class="col-2 table-card-content">
+                    0.6%
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Classic tabs -->
+        <div class="classic-tabs">
+
+            <!-- Nav tabs -->
+            <ul class="nav tabs-white nav-fill" role="tablist">
+                <li class="nav-item ml-0">
+                    <a class="nav-link waves-light active" data-toggle="tab" href="#panel1001" role="tab">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-light" data-toggle="tab" href="#panel1002" role="tab">Follow</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-light" data-toggle="tab" href="#panel1003" role="tab">Contact</a>
+                </li>
+            </ul>
+
+            <div class="tab-content rounded-bottom">
+                <!--Panel 1-->
+                <div class="tab-pane fade in show active" id="panel1001" role="tabpanel">
+                    <canvas id="lineChart" height="250px"></canvas>
+                </div>
+                <!--/.Panel 1-->
+                <!--Panel 2-->
+                <div class="tab-pane fade" id="panel1002" role="tabpanel">
+                    <p align="justify" class="font-small text-muted mx-1">Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde
+                        eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit
+                        minima.</p>
+                    <p align="justify" class="font-small text-muted mx-1">Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde
+                        eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit
+                        minima.</p>
+                </div>
+                <!--/.Panel 2-->
+                <!--Panel 3-->
+                <div class="tab-pane fade" id="panel1003" role="tabpanel">
+                    <img class="img-fluid z-depth-1 rounded mb-3" alt="sample image"
+                         src="https://mdbootstrap.com/img/Photos/Others/intro1.jpg">
+                    <p align="justify" class="font-small text-muted mx-1">Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde
+                        eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima
+                        at ipsum sit amet.</p>
+                </div>
+                <!--/.Panel 3-->
+            </div>
+
+        </div>
+        <!-- Classic tabs -->
+
+    </div>
+
+</div>
+{% endblock %}
